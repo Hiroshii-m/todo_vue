@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="dist/css/style.css">
+    <title>TODO APP Vue</title>
+</head>
+<body class="u-bgColor-base">
+    
+    <!-- header -->
+    <header id="l-header" class="u-border-bottom">
+        <div class="c-header">
+            <h2 class="c-header__home">
+                <i class="fas fa-calendar-check"></i>
+                <a class="c-header__text" href="">Todo-App</a>
+            </h2>
+            <h3 
+                class="c-header__other"
+                @mouseover="mouseover"
+                @mouseleave="mouseleave">
+                <div class="c-header__menu" :class="{ active: isShow }">
+                    Web-Tool
+                    <i v-show="!isShow" class="fas fa-chevron-down"></i>
+                    <i v-show="isShow" class="fas fa-chevron-up"></i>
+                </div>
+                <transition name="fade">
+                    <ul v-show="isShow" class="c-header__subitem">
+                        <li class="c-header__item">
+                            <a href="">Web-Tool1</a>
+                        </li>
+                        <li class="c-header__item">
+                            <a href="">Web-Tool2</a>
+                        </li>
+                        <li class="c-header__item">
+                            <a href="">Web-Tool3</a>
+                        </li>
+                    </ul>
+                </transition>
+            </h3>
+        </div>
+    </header><!-- /header -->
+
+    <!-- main -->
+    <section id="l-main">
+        <div id="js-app" class="c-main">
+            <div id="l-addTask">
+                <div class="c-addTask">
+                    <input v-model="addText" type="text" class="c-addTask__input" placeholder="ここに追加したいタスクを書く">
+                    <button @click="handleAddText" class="c-addTask__add">
+                        <i class="fas fa-plus"></i>
+                        追加
+                    </button>
+                    <p>入力が空です</p>
+                </div>
+            </div>
+            <div id="l-search">
+                <div class="c-search">
+                    <i class="fas fa-search c-search__icon"></i>
+                    <input v-model="searchText" @keyup="handleSearch()" type="text" class="c-search__input" placeholder="ここに検索したいワードを入力してください">
+                </div>
+            </div>
+            <div id="l-list">
+                <ul id="todo-list" class="c-list">
+                    <todo-task
+                        v-for="task in tasks"
+                        :key="task.id"
+                        :task="task"
+                        @edit="handleEdit(task.id)"
+                        @close-edit="handleCloseEdit(task.id)"
+                        @toggle="handleToggle(task.id)"
+                        @remove="handleRemove(task.id)"
+                    ></todo-task>
+                </ul>
+            </div>
+        </div>
+    </section><!-- /main -->
+    <script src="dist/js/bundle.js"></script>
+</body>
+</html>

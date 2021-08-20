@@ -1,0 +1,43 @@
+
+// ======================================
+// foundation
+// ======================================
+@use 'foundation/reset';
+@use 'foundation/variables';
+// ======================================
+// layout
+// ======================================
+#l-header {
+    width: 100%;
+}
+// ======================================
+// object
+// ======================================
+// Component
+// **************************************
+.c-header {
+    width: 90%;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    &__home {
+        margin-right: 50px;
+        font-weight: bold;
+    }
+    &__other {
+        font-size: var(--font-size_m);
+        padding: var(--space_s);
+        border: 1px solid var(--font-color_default);
+        border-radius: 5px;
+    }
+}
+// Project
+// **************************************
+// Utility
+// **************************************
+.u-border {
+    &-bottom {
+        border-bottom: 3px solid var(--color_accent);
+    }
+}
